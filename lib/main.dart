@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:profile_bertiga/profile_berryl.dart';
+import 'package:profile_bertiga/profile_rizky.dart';
+import 'profile_zahran.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,41 +43,47 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/10041.jpg"),
+              ),
               title: const Text("Sayyid Berryl M",
                   style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Sayyid Berryl M", role: "Backend Developer")),
+                    builder: (context) => ProfileBerryl(),
+                  ),
                 );
               },
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
-              title:
-                  const Text("Teman A", style: TextStyle(color: Colors.white)),
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/09806.jpg"),
+              ),
+              title: const Text("Muhamad Rizqi F",
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Teman A", role: "UI/UX Designer")),
+                    builder: (context) => ProfileRizqi(),
+                  ),
                 );
               },
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
-              title:
-                  const Text("Teman B", style: TextStyle(color: Colors.white)),
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/10119.jpg"),
+              ),
+              title: const Text("Zahran Fairuz R",
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Teman B", role: "Mobile Developer")),
+                    builder: (context) => ProfileZahran(),
+                  ),
                 );
               },
             ),
@@ -141,29 +150,32 @@ class MyHomePage extends StatelessWidget {
 
                 // Deskripsi
                 const Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-                  "incididunt ut labore et dolore magna aliqua.",
+                  "Kami adalah tim yang terdiri dari tiga orang dengan keahlian berbeda. "
+                  "Bersama-sama kami membangun berbagai proyek digital mulai dari desain, "
+                  "pengembangan frontend, hingga backend. "
+                  "Portfolio ini dibuat untuk memperkenalkan karya serta perjalanan kami di dunia IT.",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
+
                 const SizedBox(height: 30),
 
                 buildProfileCard(
-                  "assets/images/profile.png",
+                  "assets/images/10041.jpg",
                   "Sayyid Berryl M",
                   "Backend Developer",
                 ),
                 const SizedBox(height: 15),
                 buildProfileCard(
-                  "assets/images/profile.png",
-                  "Teman A",
-                  "UI/UX Designer",
+                  "assets/images/09806.jpg",
+                  "Muhamad Rizqi F",
+                  "Frontend Developer",
                 ),
                 const SizedBox(height: 15),
                 buildProfileCard(
-                  "assets/images/profile.png",
-                  "Teman B",
-                  "Mobile Developer",
+                  "assets/images/10119.jpg",
+                  "Zahran Fairuz R",
+                  "Frontend Developer",
                 ),
               ],
             ),
