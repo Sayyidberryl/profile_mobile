@@ -28,14 +28,17 @@ class MyHomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.amber),
-              child: Text(
-                "Menu Navigasi",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 100, // atur tinggi sesuai kebutuhan
+              child: const DrawerHeader(
+                decoration: BoxDecoration(color: Colors.amber),
+                child: Text(
+                  "Menu Navigasi",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
