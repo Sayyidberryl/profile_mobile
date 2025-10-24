@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart'; 
+import 'package:profile_bertiga/profile_berryl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Portfolio Bertiga",
+      title: "Portfolio",
       home: const MyHomePage(),
     );
   }
@@ -20,8 +22,45 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
+  Widget buildSocialIcon(IconData icon) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Icon(
+        icon,
+        size: 30,
+        color: Colors.black,
+      ),
+    );
+  }
+
+  Widget buildRoleItem(IconData icon, String title) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: Colors.black),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          title,
+          style: const TextStyle(color: Colors.white, fontSize: 12),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final List<String> imgList = [];
+
     return Scaffold(
       drawer: Drawer(
         backgroundColor: const Color(0xFF101638),
@@ -29,7 +68,7 @@ class MyHomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             SizedBox(
-              height: 100, // atur tinggi sesuai kebutuhan
+              height: 100,
               child: const DrawerHeader(
                 decoration: BoxDecoration(color: Colors.amber),
                 child: Text(
@@ -43,41 +82,17 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/10041.jpg"),
+              ),
               title: const Text("Sayyid Berryl M",
                   style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Sayyid Berryl M", role: "Backend Developer")),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
-              title:
-                  const Text("Teman A", style: TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Teman A", role: "UI/UX Designer")),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person, color: Colors.white),
-              title:
-                  const Text("Teman B", style: TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProfilePage(
-                          name: "Teman B", role: "Mobile Developer")),
+                    builder: (context) => ProfileBerryl(),
+                  ),
                 );
               },
             ),
@@ -112,18 +127,18 @@ class MyHomePage extends StatelessWidget {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: "Selamat Datang\n",
+                        text: "Hello, \n",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 24,
+                          fontSize: 34,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: "Perkenalkan kami",
+                        text: "Im Berryl",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: 34,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -135,94 +150,101 @@ class MyHomePage extends StatelessWidget {
                 SizedBox(
                   height: 275,
                   child: Image.asset(
-                    "assets/images/foto_bertiga.png",
+                    "assets/images/foto.png",
                     fit: BoxFit.contain,
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                // Deskripsi
                 const Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-                  "incididunt ut labore et dolore magna aliqua.",
+                  "Saya adalah seorang programmer yang penuh rasa ingin tahu  "
+                  "dan suka menyelesaikan masalah nyata dengan teknologi, ",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
+
                 const SizedBox(height: 30),
 
-                buildProfileCard(
-                  "assets/images/profile.png",
-                  "Sayyid Berryl M",
-                  "Backend Developer",
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F1635),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Role",
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildRoleItem(Icons.phone_android, "Mobile Dev"),
+                          buildRoleItem(Icons.code, "Fullstack Dev"),
+                          buildRoleItem(Icons.palette, "UI/UX Design"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 15),
-                buildProfileCard(
-                  "assets/images/profile.png",
-                  "Teman A",
-                  "UI/UX Designer",
+
+                const SizedBox(height: 30),
+
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 180,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.8,
+                  ),
+                  items: imgList.map((item) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              image: AssetImage(item),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
-                const SizedBox(height: 15),
-                buildProfileCard(
-                  "assets/images/profile.png",
-                  "Teman B",
-                  "Mobile Developer",
+                const SizedBox(height: 20),
+                const Text(
+                  "Media Sosial",
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildSocialIcon(Icons.mail),
+                    buildSocialIcon(Icons.discord),
+                    buildSocialIcon(Icons.tiktok),
+                    buildSocialIcon(Icons.telegram),
+                  ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  // Reusable card profile
-  Widget buildProfileCard(String image, String name, String role) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1B1B3A),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          // Avatar
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.amber, width: 2),
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(width: 15),
-
-          // Nama & Role
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              Text(
-                role,
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
